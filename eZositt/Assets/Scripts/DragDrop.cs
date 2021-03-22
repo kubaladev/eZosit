@@ -14,6 +14,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
 
@@ -22,17 +23,31 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Vector3 startingPos;
+    public Image img;
+    public bool active = true;
+    private float maxScale;
+    private float minScale;
 
     private void Awake() {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        img = GetComponent<Image>();
+        minScale = (rectTransform.localScale.x + rectTransform.localScale.y) * 0.25f;
+        maxScale = (rectTransform.localScale.x + rectTransform.localScale.y) * 3.5f;
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
-        Debug.Log("OnBeginDrag");
-        canvasGroup.alpha = .6f;
-        canvasGroup.blocksRaycasts = false;
-        startingPos = rectTransform.position;
+        if (active)
+        {
+            Debug.Log("OnBeginDrag");
+            canvasGroup.alpha = 1f;
+            canvasGroup.blocksRaycasts = false;
+            startingPos = rectTransform.position;
+            LevelManager.Instance.ChangeCursor(true);
+            img.material = LevelManager.Instance.empty;
+        }
+
+
     }
 
     public void OnDrag(PointerEventData eventData) {
@@ -40,6 +55,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         if (CheckBounds(eventData))
         {
             rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+
         }
         else
         {
@@ -48,18 +64,32 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        Debug.Log("OnEndDrag");
-        canvasGroup.alpha = 1f;
-        canvasGroup.blocksRaycasts = true;
+        if (active)
+        {
+            Debug.Log("OnEndDrag");
+            canvasGroup.alpha = 1f;
+            canvasGroup.blocksRaycasts = true;
+            img.material = LevelManager.Instance.wave;
+        }
+
+
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        LevelManager.Instance.ChangeCursor(true);
+        if (active)
+        {
+            LevelManager.Instance.SelectObject(this);
+        }
+
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        LevelManager.Instance.ChangeCursor(false);
+        if (active)
+        {
+            LevelManager.Instance.ChangeCursor(false);
+        }
+
     }
     public bool CheckBounds(PointerEventData eventData)
     {
@@ -74,5 +104,24 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     public void ResetLastPosition()
     {
         rectTransform.position = startingPos;
+    }
+    public void DisableMovement()
+    {
+        active = false;
+        if (LevelManager.Instance.selectedObject == this)
+        {
+            LevelManager.Instance.UnselectObject();
+        }
+        img.material = LevelManager.Instance.empty;
+    }
+    public void Scale(float upscaleValue)
+    {
+        if ((upscaleValue < 0 || rectTransform.localScale.x + rectTransform.localScale.y < maxScale)&&
+            (upscaleValue > 0 || rectTransform.localScale.x + rectTransform.localScale.y > minScale))
+        {
+            rectTransform.localScale = new Vector3(rectTransform.localScale.x + upscaleValue, rectTransform.localScale.y + upscaleValue, 1);
+        }
+       
+      
     }
 }

@@ -36,10 +36,13 @@ public class ItemSlot : MonoBehaviour, IDropHandler {
             {
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
                 other.localScale = place.localScale;
+                LevelManager.Instance.UnselectObject();
+                other.GetComponent<DragDrop>().DisableMovement();
             }
             else
             {
                 other.GetComponent<DragDrop>().ResetLastPosition();
+                LevelManager.Instance.UnselectObject();
             }
            
         }
