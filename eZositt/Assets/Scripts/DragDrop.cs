@@ -1,29 +1,20 @@
-﻿/* 
-    ------------------- Code Monkey -------------------
-
-    Thank you for downloading this package
-    I hope you find it useful in your projects
-    If you have any questions let me know
-    Cheers!
-
-               unitycodemonkey.com
-    --------------------------------------------------
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
 
     [SerializeField] private Canvas canvas;
 
-    private RectTransform rectTransform;
+    public RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Vector3 startingPos;
     public Image img;
+    public int imageID=0;
+    public int contextID = 0;
     public bool active = true;
     private float maxScale;
     private float minScale;
@@ -120,8 +111,20 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             (upscaleValue > 0 || rectTransform.localScale.x + rectTransform.localScale.y > minScale))
         {
             rectTransform.localScale = new Vector3(rectTransform.localScale.x + upscaleValue, rectTransform.localScale.y + upscaleValue, 1);
-        }
-       
-      
+        }   
+    }
+    public void Rotate(float value)
+    {
+        rectTransform.eulerAngles = new Vector3(0,0,rectTransform.eulerAngles.z + value);
+    }
+    public void FadeOut()
+    {
+        canvasGroup.DOFade(0, 0.4f);
+        rectTransform.DOScale(Vector3.zero, 0.4f);
+        Invoke("DestroyMe", 0.41f);
+    }
+    private void DestroyMe()
+    {
+        Destroy(this.gameObject);
     }
 }

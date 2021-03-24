@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public struct UIBounds
 {
     public float n;
@@ -21,9 +22,23 @@ public class LevelManager : Singleton<LevelManager>
     public Material wave;
     public Material empty;
     public DragDrop selectedObject = null;
+    public RectTransform[] shuffleArray;
+    public int contextPoints = 0;
+    public int contextMaxPoints = 0;
     private void Awake()
     {
         Cursor.SetCursor(CursorTexture,new Vector2(50f,20f), CursorMode.Auto);
+    }
+    private void Start()
+    {
+        foreach(RectTransform rc in shuffleArray)
+        {
+            int random = Random.Range(0, shuffleArray.Length);
+            Vector3 helpPos = rc.position;
+            rc.position = shuffleArray[random].position;
+            shuffleArray[random].position = helpPos;
+
+        }
     }
     public void ChangeCursor(bool hand)
     {
@@ -38,8 +53,14 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void SelectObject(DragDrop dragObj)
     {
-        selectedObject = dragObj;
-        selectedObject.img.material = wave;
+        if (dragObj != selectedObject)
+        {
+            UnselectObject();
+            selectedObject = dragObj;
+            selectedObject.img.material = wave;
+            SoundManager.Instance.PlaySound(3);
+        }
+
         
     }
     public void UnselectObject()
@@ -54,6 +75,34 @@ public class LevelManager : Singleton<LevelManager>
         if (Input.GetMouseButtonDown(1))
         {
             UnselectObject();
+        }
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void CheckComplete()
+    {
+        if (contextPoints >= contextMaxPoints)
+        {
+            SoundManager.Instance.PlaySound(5);
+            Invoke("NextTask", 1f);
+        }
+        else
+        {
+            Restart();
+        }
+    }
+    public void NextTask()
+    {
+        //TODOFIX
+        if (SceneManager.GetActiveScene().buildIndex + 1 < 3)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

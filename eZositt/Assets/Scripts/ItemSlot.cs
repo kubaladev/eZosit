@@ -18,6 +18,8 @@ using UnityEngine.EventSystems;
 public class ItemSlot : MonoBehaviour, IDropHandler {
     public float scaleOffsetX;
     public float scaleOffsetY;
+    public int imageID=0;
+    public int contextID = 0;
     RectTransform place;
     private void Awake()
     {
@@ -32,18 +34,29 @@ public class ItemSlot : MonoBehaviour, IDropHandler {
             if (other.localScale.x <= place.localScale.x + scaleOffsetX &&
                 other.localScale.y <= place.localScale.y + scaleOffsetY &&
                 other.localScale.x >= place.localScale.x - scaleOffsetX &&
-                other.localScale.y >= place.localScale.y - scaleOffsetY)
+                other.localScale.y >= place.localScale.y - scaleOffsetY &&
+                other.GetComponent<DragDrop>().imageID.Equals(imageID))
             {
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
                 other.localScale = place.localScale;
+                other.rotation = place.rotation;
                 LevelManager.Instance.UnselectObject();
-                other.GetComponent<DragDrop>().DisableMovement();
+                DragDrop dg = other.GetComponent<DragDrop>();
+                dg.DisableMovement();
+                if (dg.contextID == contextID)
+                {
+                    LevelManager.Instance.contextPoints++;
+                }
+                SoundManager.Instance.PlaySound(2);
             }
             else
             {
                 other.GetComponent<DragDrop>().ResetLastPosition();
                 LevelManager.Instance.UnselectObject();
+                SoundManager.Instance.PlaySound(4);
+
             }
+           
            
         }
     }
