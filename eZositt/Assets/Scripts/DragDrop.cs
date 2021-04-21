@@ -5,26 +5,19 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
-
-    [SerializeField] private Canvas canvas;
-
-    public RectTransform rectTransform;
-    private CanvasGroup canvasGroup;
-    private Vector3 startingPos;
-    public Image img;
+public class DragDrop : GeneratedObject, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
     public int imageID=0;
     public int contextID = 0;
     public bool active = true;
     private float maxScale;
     private float minScale;
 
-    private void Awake() {
-        rectTransform = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
-        img = GetComponent<Image>();
+    protected override void Awake() {
+
+        base.Awake();
         minScale = (rectTransform.localScale.x + rectTransform.localScale.y) * 0.25f;
         maxScale = (rectTransform.localScale.x + rectTransform.localScale.y) * 3.5f;
+
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
@@ -35,7 +28,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             canvasGroup.blocksRaycasts = false;
             startingPos = rectTransform.position;
             LevelManager.Instance.ChangeCursor(true);
-            img.material = LevelManager.Instance.empty;
+           // img.material = LevelManager.Instance.empty;
         }
 
 
@@ -60,7 +53,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             Debug.Log("OnEndDrag");
             canvasGroup.alpha = 1f;
             canvasGroup.blocksRaycasts = true;
-            img.material = LevelManager.Instance.wave;
         }
 
 
@@ -71,6 +63,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         if (active)
         {
             LevelManager.Instance.SelectObject(this);
+            //TEST
+            ImageSerializer.Instance.st = new SerializeTexture(this);
         }
 
     }
@@ -103,7 +97,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         {
             LevelManager.Instance.UnselectObject();
         }
-        img.material = LevelManager.Instance.empty;
     }
     public void Scale(float upscaleValue)
     {
@@ -121,10 +114,19 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     {
         canvasGroup.DOFade(0, 0.4f);
         rectTransform.DOScale(Vector3.zero, 0.4f);
-        Invoke("DestroyMe", 0.41f);
+        Destroy(this.gameObject, 0.41f);
     }
-    private void DestroyMe()
+    public void OnSelectObject()
     {
-        Destroy(this.gameObject);
+        outline.enabled = true;
+        SoundManager.Instance.PlaySound(3);
+    }
+    public void OnUnselectObject()
+    {
+        outline.enabled = false;
+    }
+    public void Serialize()
+    {
+
     }
 }

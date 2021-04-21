@@ -53,7 +53,7 @@ public class InteractionManager : Singleton<InteractionManager>
     }
 
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (scale)
         {

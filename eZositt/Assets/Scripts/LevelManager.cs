@@ -57,8 +57,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             UnselectObject();
             selectedObject = dragObj;
-            selectedObject.img.material = wave;
-            SoundManager.Instance.PlaySound(3);
+            selectedObject.OnSelectObject();
         }
 
         
@@ -67,7 +66,8 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (selectedObject != null)
         {
-            selectedObject.img.material = empty;
+            selectedObject.OnUnselectObject();
+            selectedObject = null;
         }
     }
     private void Update()
