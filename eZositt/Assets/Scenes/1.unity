@@ -492,9 +492,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _persistent: 0
-  scaleSpeed: 0.00135
-  rotationSpeed: 0.15
+  scaleSpeed: 0.01
+  rotationSpeed: 1.25
   scale: 0
+--- !u!21 &272822959
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &274010894
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,6 +714,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4eed7d463ab4945a7eeac35cd6b294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
+  img: {fileID: 0}
+  outline: {fileID: 0}
+  canvas: {fileID: 0}
+  type: 
   scaleOffsetX: 0
   scaleOffsetY: 0
   imageID: 2
@@ -1549,7 +1588,6 @@ GameObject:
   - component: {fileID: 638184787}
   - component: {fileID: 638184786}
   - component: {fileID: 638184785}
-  - component: {fileID: 638184784}
   - component: {fileID: 638184789}
   m_Layer: 5
   m_Name: dragObj (8)
@@ -1577,22 +1615,6 @@ RectTransform:
   m_AnchoredPosition: {x: 221, y: 0.0000047684}
   m_SizeDelta: {x: 54.935593, y: 36.00403}
   m_Pivot: {x: 0.5, y: 0.5000001}
---- !u!114 &638184784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638184782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shaderTypes: 0
-  normalStrenght: 5
-  normalSmoothing: 1
-  computingNormal: 0
 --- !u!225 &638184785
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1617,10 +1639,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb44f23d8d33c004b8f2e232aaf5d6e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 861568866}
   rectTransform: {fileID: 0}
   img: {fileID: 638184787}
   outline: {fileID: 0}
+  canvas: {fileID: 861568866}
+  type: 
   imageID: 3
   contextID: 0
   active: 1
@@ -1636,7 +1659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: cc460e5b1c6c0bd498b44195a0c3da99, type: 2}
+  m_Material: {fileID: 272822959}
   m_Color: {r: 0.14509805, g: 0.26666668, b: 0.3254902, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
@@ -1668,7 +1691,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638184782}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
@@ -1723,15 +1746,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649557016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shaderTypes: 0
-  normalStrenght: 5
-  normalSmoothing: 1
-  computingNormal: 0
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!225 &649557019
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1756,10 +1778,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb44f23d8d33c004b8f2e232aaf5d6e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 861568866}
   rectTransform: {fileID: 0}
   img: {fileID: 649557021}
   outline: {fileID: 0}
+  canvas: {fileID: 861568866}
+  type: 
   imageID: 2
   contextID: 0
   active: 1
@@ -1775,7 +1798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: cc460e5b1c6c0bd498b44195a0c3da99, type: 2}
+  m_Material: {fileID: 1451113491}
   m_Color: {r: 0.86274517, g: 0.7372549, b: 0.54901963, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
@@ -1966,15 +1989,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714703797}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shaderTypes: 0
-  normalStrenght: 5
-  normalSmoothing: 1
-  computingNormal: 0
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!225 &714703800
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1999,10 +2021,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb44f23d8d33c004b8f2e232aaf5d6e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 861568866}
   rectTransform: {fileID: 0}
   img: {fileID: 714703802}
   outline: {fileID: 0}
+  canvas: {fileID: 861568866}
+  type: 
   imageID: 1
   contextID: 0
   active: 1
@@ -2018,7 +2041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: cc460e5b1c6c0bd498b44195a0c3da99, type: 2}
+  m_Material: {fileID: 1865578624}
   m_Color: {r: 0.5465038, g: 0.72156864, b: 0.36078432, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
@@ -2235,6 +2258,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4eed7d463ab4945a7eeac35cd6b294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
+  img: {fileID: 0}
+  outline: {fileID: 0}
+  canvas: {fileID: 0}
+  type: 
   scaleOffsetX: 0
   scaleOffsetY: 0
   imageID: 1
@@ -2869,10 +2897,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb44f23d8d33c004b8f2e232aaf5d6e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 861568866}
   rectTransform: {fileID: 0}
   img: {fileID: 1001304580}
   outline: {fileID: 0}
+  canvas: {fileID: 861568866}
+  type: 
   imageID: 0
   contextID: 0
   active: 1
@@ -2921,7 +2950,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001304575}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
@@ -3110,6 +3139,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4eed7d463ab4945a7eeac35cd6b294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
+  img: {fileID: 0}
+  outline: {fileID: 0}
+  canvas: {fileID: 0}
+  type: 
   scaleOffsetX: 0
   scaleOffsetY: 0
   imageID: 2
@@ -3271,6 +3305,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4eed7d463ab4945a7eeac35cd6b294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
+  img: {fileID: 0}
+  outline: {fileID: 0}
+  canvas: {fileID: 0}
+  type: 
   scaleOffsetX: 0
   scaleOffsetY: 0
   imageID: 1
@@ -3449,6 +3488,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434024115}
   m_CullTransparentMesh: 0
+--- !u!21 &1451113491
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1461037550
 GameObject:
   m_ObjectHideFlags: 0
@@ -3500,6 +3573,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4eed7d463ab4945a7eeac35cd6b294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
+  img: {fileID: 0}
+  outline: {fileID: 0}
+  canvas: {fileID: 0}
+  type: 
   scaleOffsetX: 0
   scaleOffsetY: 0
   imageID: 0
@@ -3605,6 +3683,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4eed7d463ab4945a7eeac35cd6b294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
+  img: {fileID: 0}
+  outline: {fileID: 0}
+  canvas: {fileID: 0}
+  type: 
   scaleOffsetX: 0
   scaleOffsetY: 0
   imageID: 0
@@ -3873,6 +3956,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4eed7d463ab4945a7eeac35cd6b294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
+  img: {fileID: 0}
+  outline: {fileID: 0}
+  canvas: {fileID: 0}
+  type: 
   scaleOffsetX: 0
   scaleOffsetY: 0
   imageID: 3
@@ -4187,6 +4275,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4eed7d463ab4945a7eeac35cd6b294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
+  img: {fileID: 0}
+  outline: {fileID: 0}
+  canvas: {fileID: 0}
+  type: 
   scaleOffsetX: 0
   scaleOffsetY: 0
   imageID: 2
@@ -4454,6 +4547,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4eed7d463ab4945a7eeac35cd6b294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
+  img: {fileID: 0}
+  outline: {fileID: 0}
+  canvas: {fileID: 0}
+  type: 
   scaleOffsetX: 0
   scaleOffsetY: 0
   imageID: 3
@@ -4507,6 +4605,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854498714}
   m_CullTransparentMesh: 0
+--- !u!21 &1865578624
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1899260830
 GameObject:
   m_ObjectHideFlags: 0
@@ -5065,6 +5197,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1163055659437671266, guid: e8ff62a1a660374419b71474e6d3a7e8,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163055659437671266, guid: e8ff62a1a660374419b71474e6d3a7e8,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9758907
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163055659437671266, guid: e8ff62a1a660374419b71474e6d3a7e8,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.4198113
+      objectReference: {fileID: 0}
     - target: {fileID: 1163055659437671289, guid: e8ff62a1a660374419b71474e6d3a7e8,
         type: 3}
       propertyPath: m_Name
@@ -5133,12 +5280,12 @@ PrefabInstance:
     - target: {fileID: 1163055659437671294, guid: e8ff62a1a660374419b71474e6d3a7e8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 128
+      value: 222
       objectReference: {fileID: 0}
     - target: {fileID: 1163055659437671294, guid: e8ff62a1a660374419b71474e6d3a7e8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 126.56
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1163055659437671294, guid: e8ff62a1a660374419b71474e6d3a7e8,
         type: 3}

@@ -11,7 +11,13 @@ public class DragDrop : GeneratedObject, IPointerDownHandler, IPointerUpHandler,
     public bool active = true;
     private float maxScale;
     private float minScale;
-
+    public override void Initialize(SerializedObject data)
+    {
+        base.Initialize(data);
+        imageID = data.imageID;
+        contextID = data.contextID;
+        img.color = data.color;
+    }
     protected override void Awake() {
 
         base.Awake();
@@ -36,14 +42,15 @@ public class DragDrop : GeneratedObject, IPointerDownHandler, IPointerUpHandler,
 
     public void OnDrag(PointerEventData eventData) {
         //Debug.Log("OnDrag");
-        if (CheckBounds(eventData))
-        {
-            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        if(active)
+            if (CheckBounds(eventData))
+            {
+                rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
-        }
-        else
-        {
-        }
+            }
+            else
+            {
+            }
 
     }
 
@@ -63,8 +70,6 @@ public class DragDrop : GeneratedObject, IPointerDownHandler, IPointerUpHandler,
         if (active)
         {
             LevelManager.Instance.SelectObject(this);
-            //TEST
-            ImageSerializer.Instance.st = new SerializeTexture(this);
         }
 
     }

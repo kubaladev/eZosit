@@ -57,7 +57,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             UnselectObject();
             selectedObject = dragObj;
-            selectedObject.OnSelectObject();
+            selectedObject?.GetComponent<DragDrop>().OnUnselectObject();
         }
 
         

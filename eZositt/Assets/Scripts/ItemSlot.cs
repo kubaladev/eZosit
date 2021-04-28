@@ -4,17 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemSlot : MonoBehaviour, IDropHandler {
+public class ItemSlot : GeneratedObject, IDropHandler {
     public float scaleOffsetX;
     public float scaleOffsetY;
     public int imageID=0;
     public int contextID = 0;
     RectTransform place;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         place = this.GetComponent<RectTransform>();
         scaleOffsetX = 0.25f * place.localScale.x;
         scaleOffsetY = 0.25f * place.localScale.y;
+    }
+    public override void Initialize(SerializedObject data)
+    {
+        base.Initialize(data);
+        imageID = data.imageID;
+        contextID = data.contextID;
     }
     public void OnDrop(PointerEventData eventData) {
         Debug.Log("OnDrop");
@@ -40,8 +47,8 @@ public class ItemSlot : MonoBehaviour, IDropHandler {
             }
             else
             {
-                other.GetComponent<DragDrop>().ResetLastPosition();
-                LevelManager.Instance.UnselectObject();
+                //other.GetComponent<DragDrop>().ResetLastPosition();
+                //LevelManager.Instance.UnselectObject();
                 SoundManager.Instance.PlaySound(4);
 
             }
