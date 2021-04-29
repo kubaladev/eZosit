@@ -12,9 +12,8 @@ public class GeneralPanel : MonoBehaviour
     public void SetupPanel(RectTransform rect)
     {
         selectedRT = rect;
-        selectedRT.rect.Set(0, 0, 1, 1);
-        vyskaInp.text = Mathf.RoundToInt(rect.rect.width).ToString();
-        sirkaInp.text = Mathf.RoundToInt(rect.rect.height).ToString();
+        sirkaInp.text = Mathf.RoundToInt(rect.rect.width).ToString();
+        vyskaInp.text = Mathf.RoundToInt(rect.rect.height).ToString();
     }
     public void UpdateRectSizeFromText()
     {
