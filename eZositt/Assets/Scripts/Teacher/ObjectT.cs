@@ -13,6 +13,7 @@ public class ObjectT:MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     Canvas canvas;
     RectTransform rectTransform;
     Image icon;
+    public RawImage img;
     public void SetTyp(GenObjectType typ, Sprite iconSprite)
     {
         this.typ = typ;
@@ -25,6 +26,7 @@ public class ObjectT:MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
         icon = GetComponentInChildren<ImgSetter>().img;
         rectTransform = GetComponent<RectTransform>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        img = GetComponent<RawImage>();
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
