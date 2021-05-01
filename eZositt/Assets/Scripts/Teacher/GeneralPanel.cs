@@ -15,8 +15,9 @@ public class GeneralPanel : MonoBehaviour
     public RawImage rawImage;
     bool holdingPercentBtn = false;
     bool upscale = false;
-    public void SetupPanel(RectTransform rect, RawImage ri)
+    public void SetupPanel(RectTransform rect, RawImage ri,ObjectT objT)
     {
+        this.objT = objT;
         selectedRT = rect;
         sirkaInp.text = Mathf.RoundToInt(rect.rect.width).ToString();
         vyskaInp.text = Mathf.RoundToInt(rect.rect.height).ToString();
@@ -24,6 +25,20 @@ public class GeneralPanel : MonoBehaviour
         rotationInp.text = Mathf.RoundToInt(selectedRT.localEulerAngles.z).ToString();
         rawImage = ri;
 
+    }
+    private ObjectT objT;
+    public void Delete()
+    {
+        objT.FadeOut();
+        HidePanel();
+    }
+    public void Duplicate()
+    {
+        objT.Duplicate();
+    }
+    public void HidePanel()
+    {
+        this.gameObject.SetActive(false);
     }
     public void UpdateRectSizeFromText()
     {

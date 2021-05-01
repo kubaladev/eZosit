@@ -14,7 +14,7 @@ public class ObjectModificator : Singleton<ObjectModificator>
         this.go = go;
         this.OT = OT;
         generalPanel.gameObject.SetActive(true);
-        generalPanel.SetupPanel(go.rectTransform, OT.img);
+        generalPanel.SetupPanel(go.rectTransform, OT.img,OT);
         if (OT.prefabTyp.Equals(PrefabType.Tvar))
         {
             tvarPanel.gameObject.SetActive(true);

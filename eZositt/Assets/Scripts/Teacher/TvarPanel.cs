@@ -10,23 +10,28 @@ public class TvarPanel : MonoBehaviour
         this.objT = objt;
         tvar = img;
         this.rect = rect;
+        SetButtonColor(colorBtn, img.color);
     }
+    public Button colorBtn;
     public Texture2D[] tvary;
     private RawImage tvar;
     private RectTransform rect;
     private ObjectT objT;
-    public void Delete()
+    public ColorSelector colorSelector;
+
+    public void UpdateColorBtn()
     {
-        objT.FadeOut();
-        HidePanel();
+        SetButtonColor(colorBtn, tvar.color);
     }
-    public void Duplicate()
+    public void SetButtonColor(Button b, Color c)
     {
-        objT.Duplicate();
+        ColorBlock cb = b.colors;
+        cb.normalColor = c;
+        b.colors = cb;
     }
-    public void HidePanel()
+    public void OpenColorMenu()
     {
-        this.gameObject.SetActive(false);
+        colorSelector.SetupPanel(tvar);
     }
     public void SetTvar(int id)
     {

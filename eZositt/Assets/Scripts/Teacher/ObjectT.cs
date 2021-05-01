@@ -84,7 +84,7 @@ public class ObjectT:MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
             gorc.DOMoveX(gorc.position.x + 1f, 0.5f);
             gorc.DOScale(scaledGO, 0.5f);
 
-            ObjectModificator.Instance.SelectObject(this.GetComponent<GeneratedObject>(),this);
+            ObjectModificator.Instance.SelectObject(go.GetComponent<GeneratedObject>(),go.GetComponent<ObjectT>());
             SoundManager.Instance.PlaySound(0);
         }
 
