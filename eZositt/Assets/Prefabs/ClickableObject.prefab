@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5236573859179533670}
   - component: {fileID: 5236573859179533691}
-  - component: {fileID: 5236573859179533690}
   - component: {fileID: 5236573859179533668}
   - component: {fileID: 4155893871737809914}
   - component: {fileID: 5236573859179533666}
+  - component: {fileID: 2608324282478789052}
   m_Layer: 5
   m_Name: ClickableObject
   m_TagString: Dragable
@@ -48,35 +48,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5236573859179533665}
   m_CullTransparentMesh: 0
---- !u!114 &5236573859179533690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5236573859179533665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3261ef57fb36ca64487ed2c38378236d, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 1
-  m_PixelsPerUnitMultiplier: 1
 --- !u!225 &5236573859179533668
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -126,3 +97,29 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b84076d7f1fa0a34a95271463caa607c, type: 3}
   - {fileID: 21300000, guid: 6a447f9cb73f7ff43b2a27def657ffcc, type: 3}
   correctId: 1
+--- !u!114 &2608324282478789052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236573859179533665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 3261ef57fb36ca64487ed2c38378236d, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1

@@ -10,7 +10,7 @@ public class GeneratedObject : MonoBehaviour
     [HideInInspector] public RectTransform rectTransform;
     protected CanvasGroup canvasGroup;
     protected Vector3 startingPos;
-    public Image img;
+    public RawImage img;
     [SerializeField]
     protected Outline outline;
     [SerializeField] protected Canvas canvas;
@@ -21,7 +21,7 @@ public class GeneratedObject : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        img = GetComponent<Image>();
+        img = GetComponent<RawImage>();
         outline = GetComponent<Outline>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
     }
@@ -32,8 +32,7 @@ public class GeneratedObject : MonoBehaviour
         //data = JsonUtility.FromJson<SerializeTexture>(text);
         Texture2D tex = new Texture2D(data.texX, data.texY);
         ImageConversion.LoadImage(tex, data.texbytes);
-        Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), Vector2.one);
-        img.sprite = mySprite;
+        img.texture = tex;
         rectTransform.position = data.position;
         rectTransform.localScale = data.scale;
         rectTransform.localRotation = data.rotation;

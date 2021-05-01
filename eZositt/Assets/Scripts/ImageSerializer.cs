@@ -37,7 +37,7 @@ public class SerializedObject
         rotation = obj.rectTransform.localRotation;
         type = obj.type;
         
-        Texture2D tex = obj.img.sprite.texture;
+        Texture2D tex = (Texture2D)obj.img.texture;
         texX = tex.width;
         texY = tex.height;
         sizeDelta = obj.rectTransform.sizeDelta;
@@ -46,7 +46,7 @@ public class SerializedObject
         {
             ClickableObject co = (ClickableObject)obj;
             additionalTextures = new List<SerializableTexture>();
-            foreach (Sprite s in co.imgFace)
+            foreach (Texture2D s in co.imgFace)
             {
                 additionalTextures.Add(new SerializableTexture(s));
             }
@@ -99,9 +99,9 @@ public class SerializedObject
 [System.Serializable]
 public class SerializableTexture
 {
-    public SerializableTexture(Sprite s)
+    public SerializableTexture(Texture2D s)
     {
-        Texture2D tex = s.texture;
+        Texture2D tex = s;
         texX = tex.width;
         texY = tex.height;
         texbytes = ImageConversion.EncodeToPNG(tex);
