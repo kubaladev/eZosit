@@ -1,20 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class ObjectFactory : MonoBehaviour
+public class ObjectFactory : Singleton<ObjectFactory>
 {
     public GameObject GenerationArea;
     public GameObject dragPref;
     public GameObject statPref;
     public GameObject clickPref;
+    public TMP_Text zadanie;
+    public GameObject innerPanel;
 
     public void TestLoad()
     {
         GenerateScene(ImageSerializer.Instance.data.objects);
+        zadanie.text = ImageSerializer.Instance.data.zadanie;
+        innerPanel.SetActive(false);
     }
     public void GenerateScene(SerializedObject[] data)
     {
+        Debug.Log("Loaded data " + data.Length);
         foreach(SerializedObject obj in data)
         {
             if (obj.type.Equals("Drag"))
@@ -30,8 +36,13 @@ public class ObjectFactory : MonoBehaviour
             if (obj.type.Equals("Stat"))
             {
                 GameObject go = Instantiate(statPref, GenerationArea.transform);
+                go.transform.SetAsFirstSibling();
                 go.GetComponent<GeneratedObject>().Initialize(obj);
             }
         }
+    }
+    public void GameOver()
+    {
+        Application.Quit();
     }
 }

@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 public class ItemSlot : GeneratedObject, IDropHandler {
     public float scaleOffsetX;
     public float scaleOffsetY;
-    public int imageID=0;
     public int contextID = 0;
     RectTransform place;
     protected override void Awake()

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using DG.Tweening;
 
 public class DragDrop : GeneratedObject, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
-    public int imageID=0;
     public int contextID = 0;
     public bool active = true;
     private float maxScale;

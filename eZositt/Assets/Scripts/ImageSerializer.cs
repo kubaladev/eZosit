@@ -8,23 +8,27 @@ public class ImageSerializer : Singleton<ImageSerializer>
 {
     public DataFile data;
     public GameObject serializationArea;
-    public void LoadData()
+    public string zadanie="";
+    public void LoadData(string path)
     {
-        string text = File.ReadAllText(@"d:\test.json");
+        string text = File.ReadAllText(path);
         DataFile df = JsonUtility.FromJson<DataFile>(text);
         data = df;
+        ObjectFactory.Instance.TestLoad();
     }
     public void SerializeScene()
     {
         GeneratedObject[] data = serializationArea.GetComponentsInChildren<GeneratedObject>();
         List<SerializedObject> objects = new List<SerializedObject>();
+        Debug.Log("Number of objects serialized: " + data.Length);
         foreach (GeneratedObject obj in data)
         {
             objects.Add(new SerializedObject(obj));
         }
         DataFile df = new DataFile();
         df.objects = objects.ToArray();
-        df.SaveData();
+        df.zadanie = zadanie;
+        FileLoader.Instance.SaveAnimation(df.SaveData());
     }
 }
 [System.Serializable]
@@ -40,6 +44,7 @@ public class SerializedObject
         Texture2D tex = (Texture2D)obj.img.texture;
         texX = tex.width;
         texY = tex.height;
+        rawRect = obj.img.uvRect;
         sizeDelta = obj.rectTransform.sizeDelta;
         texbytes = ImageConversion.EncodeToPNG(tex);
         if(obj is ClickableObject)
@@ -94,6 +99,10 @@ public class SerializedObject
 
     [SerializeField]
     public Color color;
+
+    [SerializeField]
+    public Rect rawRect;
+
 }
 
 [System.Serializable]
@@ -119,9 +128,10 @@ public class DataFile
 {
     [SerializeField]
     public SerializedObject[] objects;
-    public void SaveData()
+    [SerializeField]
+    public string zadanie;
+    public string SaveData()
     {
-        string text = JsonUtility.ToJson(this);
-        File.WriteAllText(@"d:\test.json", text);
+        return JsonUtility.ToJson(this);
     }
 }

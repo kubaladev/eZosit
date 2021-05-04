@@ -15,6 +15,10 @@ public class GeneratedObject : MonoBehaviour
     protected Outline outline;
     [SerializeField] protected Canvas canvas;
     public string type;
+    public string objectName="";
+    public GameObject pair;
+    public int imageID=0;
+    
 
     // Start is called before the first frame update
     virtual protected void Awake()
@@ -37,8 +41,8 @@ public class GeneratedObject : MonoBehaviour
         rectTransform.localScale = data.scale;
         rectTransform.localRotation = data.rotation;
         rectTransform.sizeDelta = data.sizeDelta;
+        img.uvRect = data.rawRect;
 
-        
     }
 
     // Update is called once per frame

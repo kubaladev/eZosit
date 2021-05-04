@@ -14,6 +14,7 @@ public class ObjectT:MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     RectTransform rectTransform;
     Image icon;
     public RawImage img;
+    public Outline outline;
     public void SetTyp(GenObjectType typ, Sprite iconSprite)
     {
         this.typ = typ;
@@ -27,6 +28,7 @@ public class ObjectT:MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
         rectTransform = GetComponent<RectTransform>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         img = GetComponent<RawImage>();
+        outline = GetComponent<Outline>();
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -40,6 +42,7 @@ public class ObjectT:MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
 
     public void OnPointerDown(PointerEventData eventData)
     {
+
         ObjectModificator.Instance.SelectObject(GetComponent<GeneratedObject>(), this);
     }
 
@@ -58,7 +61,25 @@ public class ObjectT:MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     {
         
     }
+    public void OnUnselectObject()
+    {
+        outline.enabled = false;
+        GeneratedObject GO=GetComponent<GeneratedObject>();
+        if (GO.pair != null)
+        {
+            GO.pair.GetComponent<Outline>().enabled = false;
+        }
+  
+    }
+    public void OnSelectObject()
+    {
+        outline.enabled = true;
+        UpdatePair();
+    }
+    public void UpdatePair()
+    {
 
+    }
     public void OnDrag(PointerEventData eventData)
     {
         if (CheckBounds(eventData))
@@ -87,6 +108,7 @@ public class ObjectT:MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
             ObjectModificator.Instance.SelectObject(go.GetComponent<GeneratedObject>(),go.GetComponent<ObjectT>());
             SoundManager.Instance.PlaySound(0);
         }
+        UpdatePair();
 
         
     }

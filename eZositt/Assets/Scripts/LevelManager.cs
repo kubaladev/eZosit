@@ -83,14 +83,15 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void CheckComplete()
     {
+        SoundManager.Instance.PlaySound(5);
         if (contextPoints >= contextMaxPoints)
         {
-            SoundManager.Instance.PlaySound(5);
+            
             Invoke("NextTask", 1f);
         }
         else
         {
-            Restart();
+            Invoke("Restart", 1f);
         }
     }
     public void NextTask()
