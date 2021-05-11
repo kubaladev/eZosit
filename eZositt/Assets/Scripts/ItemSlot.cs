@@ -9,6 +9,7 @@ public class ItemSlot : GeneratedObject, IDropHandler {
     public float scaleOffsetY;
     public int contextID = 0;
     public bool editor = false;
+    public string text = "";
     RectTransform place;
     protected override void Awake()
     {

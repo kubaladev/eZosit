@@ -14,6 +14,8 @@ public class ObjectModificator : Singleton<ObjectModificator>
     public ObjectT OT;
     public KlikaciPanel klikaciPanel;
     public ObrPanel staticObrPanel;
+    public Galeria galeria;
+    public TextPanel textPanel;
 
     bool editMode = false;
     public void SelectObject(GeneratedObject go, ObjectT OT)
@@ -36,7 +38,7 @@ public class ObjectModificator : Singleton<ObjectModificator>
         OT.OnSelectObject();
         generalPanel.gameObject.SetActive(true);
         generalPanel.SetupPanel(go.rectTransform, OT.img, OT);
-        
+        galeria.SetupGalery(OT, go);
 
         if (OT.prefabTyp.Equals(PrefabType.Tvar))
         {
@@ -80,6 +82,13 @@ public class ObjectModificator : Singleton<ObjectModificator>
             klikaciPanel.gameObject.SetActive(true);
             klikaciPanel.SetupPanel((ClickableObject)go, OT);
         }
+        if (OT.prefabTyp.Equals(PrefabType.Text))
+        {
+            textPanel.gameObject.SetActive(true);
+            textPanel.SetupPanel(OT, (ItemSlot)go);
+            tvarPanel.gameObject.SetActive(true);
+            tvarPanel.SetupPanel(OT.img, go.rectTransform, OT, go);
+        }
 
     }
     public void LoadTexture(byte[] data)
@@ -112,5 +121,6 @@ public class ObjectModificator : Singleton<ObjectModificator>
         obrPanel.gameObject.SetActive(false);
         klikaciPanel.gameObject.SetActive(false);
         staticObrPanel.gameObject.SetActive(false);
+        textPanel.gameObject.SetActive(false);
     }
 }

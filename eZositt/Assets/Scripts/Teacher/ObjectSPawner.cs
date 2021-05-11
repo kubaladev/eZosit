@@ -73,7 +73,7 @@ public class ObjectSPawner : Singleton<ObjectSPawner>
             case GenObjectType.Click:
                 ClickableObject co = go.AddComponent<ClickableObject>();
                 OT.SetTyp(GenObjectType.Click, icons[1]);
-                co.imgFace = basicTextures;
+                co.imgFace = new List<Texture2D>(basicTextures);
                 co.img.texture = basicTextures[0];
                 OT.prefabTyp = PrefabType.Swap;
                 co.editor = true;
