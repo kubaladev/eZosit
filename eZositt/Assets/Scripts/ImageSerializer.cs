@@ -9,6 +9,12 @@ public class ImageSerializer : Singleton<ImageSerializer>
     public DataFile data;
     public GameObject serializationArea;
     public string zadanie="";
+    public bool klon = true;
+    public bool vel = true;
+    public bool rot = true;
+    public bool shuffle = false;
+    public bool random = false;
+    public bool control = true;
     public void LoadData(string path)
     {
         string text = File.ReadAllText(path);
@@ -28,7 +34,13 @@ public class ImageSerializer : Singleton<ImageSerializer>
         DataFile df = new DataFile();
         df.objects = objects.ToArray();
         df.zadanie = zadanie;
-        FileLoader.Instance.SaveJsonObject(df.SaveData());
+        df.klon = klon;
+        df.rot = rot;
+        df.random = random;
+        df.shuffle = shuffle;
+        df.control = control;
+        df.vel = vel;
+    FileLoader.Instance.SaveJsonObject(df.SaveData());
     }
 }
 [System.Serializable]
@@ -145,6 +157,12 @@ public class DataFile
     public SerializedObject[] objects;
     [SerializeField]
     public string zadanie;
+    public bool klon = true;
+    public bool vel = true;
+    public bool rot = true;
+    public bool shuffle = false;
+    public bool random = false;
+    public bool control = true;
     public string SaveData()
     {
         return JsonUtility.ToJson(this);
