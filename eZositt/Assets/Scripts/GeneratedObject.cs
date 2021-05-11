@@ -44,6 +44,7 @@ public class GeneratedObject : MonoBehaviour
         rectTransform.localRotation = data.rotation;
         rectTransform.sizeDelta = data.sizeDelta;
         img.uvRect = data.rawRect;
+        
 
     }
 

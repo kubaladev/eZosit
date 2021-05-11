@@ -23,6 +23,8 @@ public class ItemSlot : GeneratedObject, IDropHandler {
         base.Initialize(data);
         imageID = data.imageID;
         contextID = data.contextID;
+        img.color = data.color;
+        text = data.textItemSlot;
     }
     public void OnDrop(PointerEventData eventData) {
         if (!editor)

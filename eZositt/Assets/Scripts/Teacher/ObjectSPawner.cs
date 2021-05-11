@@ -75,6 +75,7 @@ public class ObjectSPawner : Singleton<ObjectSPawner>
                 OT.SetTyp(GenObjectType.Click, icons[1]);
                 co.imgFace = new List<Texture2D>(basicTextures);
                 co.img.texture = basicTextures[0];
+                co.type = "Click";
                 OT.prefabTyp = PrefabType.Swap;
                 co.editor = true;
                 break;
@@ -86,6 +87,7 @@ public class ObjectSPawner : Singleton<ObjectSPawner>
                     itemslot.img.color = Color.gray;
                     itemslot.img.texture = rectangleText;
                     itemslot.objectName = "Static tvar " + staticContextID;
+                    itemslot.type = "Stat";
                     staticContextID++;
                 }
                 if (prefabType.Equals(PrefabType.Basic))
@@ -99,7 +101,7 @@ public class ObjectSPawner : Singleton<ObjectSPawner>
                 itemSlot.contextID = -999;
                 itemSlot.imageID = -999;
                 itemSlot.objectName = "Statický obj";
-                itemSlot.type = "Stat";
+                itemSlot.type = "Afk";
                 itemSlot.editor = true;
                 break;
         }
@@ -133,6 +135,7 @@ public class ObjectSPawner : Singleton<ObjectSPawner>
         }
         itemslot.objectName = "Miesto: " + mainGO.objectName;
         itemslot.type = "Stat";
+        itemslot.editor = true;
         itemslot.img.color = Color.gray;
         mainGO.pair = itemslot.gameObject;
         itemslot.imageID = mainGO.imageID;

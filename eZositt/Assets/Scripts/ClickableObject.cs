@@ -13,6 +13,8 @@ public class ClickableObject : GeneratedObject, IPointerDownHandler
     {
         base.Initialize(data);
         imgFace = new List<Texture2D>();
+        correctId = data.correctIdClick;
+        currentId = data.currentIdClick;
         foreach (SerializableTexture sex in data.additionalTextures)
         {
             Texture2D tex = new Texture2D(sex.texX, sex.texY);
@@ -21,6 +23,7 @@ public class ClickableObject : GeneratedObject, IPointerDownHandler
             imgFace.Add(tex);
         }
         img.texture = imgFace[currentId];
+
 
     }
     public void SwitchImage()

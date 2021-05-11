@@ -55,6 +55,9 @@ public class SerializedObject
             {
                 additionalTextures.Add(new SerializableTexture(s));
             }
+            currentIdClick = co.currentId;
+            correctIdClick = co.correctId;
+
         }
         if (obj is DragDrop)
         {
@@ -68,6 +71,8 @@ public class SerializedObject
             ItemSlot dg = (ItemSlot)obj;
             imageID = dg.imageID;
             contextID = dg.contextID;
+            textItemSlot = dg.text;
+            color = dg.img.color;
         }
 
     }
@@ -102,6 +107,15 @@ public class SerializedObject
 
     [SerializeField]
     public Rect rawRect;
+
+    [SerializeField]
+    public string textItemSlot;
+
+    [SerializeField]
+    public int currentIdClick;
+
+    [SerializeField]
+    public int correctIdClick;
 
 }
 

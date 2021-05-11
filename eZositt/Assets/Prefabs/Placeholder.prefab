@@ -76,10 +76,14 @@ MonoBehaviour:
   outline: {fileID: 0}
   canvas: {fileID: 0}
   type: Stat
+  objectName: 
+  pair: {fileID: 0}
+  imageID: 4
   scaleOffsetX: 0
   scaleOffsetY: 0
-  imageID: 4
   contextID: 0
+  editor: 0
+  text: 
 --- !u!114 &4111247548087619790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

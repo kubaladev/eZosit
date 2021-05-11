@@ -1181,6 +1181,8 @@ MonoBehaviour:
   statPref: {fileID: 225578588568208989, guid: a3bf50ed175c4a1458bd1607aacf1aee, type: 3}
   clickPref: {fileID: 5236573859179533665, guid: 1db0c14a6069b9949a25fdfc96517904,
     type: 3}
+  textPref: {fileID: 2474799184418631249, guid: 1ba8b3156add81e42a135c256a2e1b0f,
+    type: 3}
   zadanie: {fileID: 873478623}
   innerPanel: {fileID: 1297217710}
 --- !u!4 &353175236
@@ -1249,7 +1251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -42.81601, y: -34}
+  m_AnchoredPosition: {x: -70, y: -31.342957}
   m_SizeDelta: {x: -182.32446, y: -105.906006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &429031501
@@ -3247,7 +3249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1297217711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3924,7 +3926,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 300.9, y: -34}
+  m_AnchoredPosition: {x: 282, y: -31}
   m_SizeDelta: {x: -730.2433, y: -105.90561}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1619518741

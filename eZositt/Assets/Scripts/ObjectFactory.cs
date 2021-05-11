@@ -9,6 +9,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
     public GameObject dragPref;
     public GameObject statPref;
     public GameObject clickPref;
+    public GameObject textPref;
     public TMP_Text zadanie;
     public GameObject innerPanel;
 
@@ -38,6 +39,24 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 GameObject go = Instantiate(statPref, GenerationArea.transform);
                 go.transform.SetAsFirstSibling();
                 go.GetComponent<GeneratedObject>().Initialize(obj);
+            }
+            if (obj.type.Equals("Afk"))
+            {
+                if (obj.textItemSlot.Equals(""))
+                {
+                    GameObject go = Instantiate(statPref, GenerationArea.transform);
+                    go.transform.SetAsFirstSibling();
+                    go.GetComponent<GeneratedObject>().Initialize(obj);
+                }
+                else
+                {
+                    GameObject go = Instantiate(textPref, GenerationArea.transform);
+                    go.transform.SetAsFirstSibling();
+                    go.AddComponent<ItemSlot>();
+                    go.GetComponent<GeneratedObject>().Initialize(obj);
+                    go.AddComponent<TextBlocker>();
+                }
+
             }
         }
     }
