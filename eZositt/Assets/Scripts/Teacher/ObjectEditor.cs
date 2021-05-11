@@ -10,12 +10,15 @@ public enum GenObjectType
     Drag,
     Click,
     Static,
+    Afk
 }
 public enum PrefabType
 {
     Tvar,
     Text,
     Basic,
+    Swap,
+    Afk
 }
 public class ObjectEditor : Singleton<ObjectEditor>
 {
@@ -24,6 +27,9 @@ public class ObjectEditor : Singleton<ObjectEditor>
     public Image iconTyp;
     public Sprite[] icons;
     public ObjectSPawner objectSpawner;
+    public GameObject pohybPanel;
+    public GameObject staticPanel;
+    public GameObject clickPanel;
     GenObjectType typ;
     // Start is called before the first frame update
     private void Awake()
@@ -32,11 +38,14 @@ public class ObjectEditor : Singleton<ObjectEditor>
     }
     public void SetType(string type)
     {
+        pohybPanel.SetActive(false);
+        clickPanel.SetActive(false);
+        staticPanel.SetActive(false);
         switch (type)
         {
-            case "Drag": this.typ = GenObjectType.Drag; iconTyp.sprite=icons[0]; break;
-            case "Click": this.typ = GenObjectType.Click; iconTyp.sprite = icons[1]; break;
-            case "Static": this.typ = GenObjectType.Static; iconTyp.sprite = icons[2]; break;
+            case "Drag": this.typ = GenObjectType.Drag; iconTyp.sprite=icons[0]; pohybPanel.SetActive(true); break;
+            case "Click": this.typ = GenObjectType.Click; iconTyp.sprite = icons[1]; clickPanel.SetActive(true); break;
+            case "Static": this.typ = GenObjectType.Afk; iconTyp.sprite = icons[2]; staticPanel.SetActive(true); break;
         }
         objectSpawner.type = this.typ;
         ShowSelection();
@@ -58,5 +67,6 @@ public class ObjectEditor : Singleton<ObjectEditor>
     private void Deactivate()
     {
         SelectionPanel.gameObject.SetActive(false);
+
     }
 }

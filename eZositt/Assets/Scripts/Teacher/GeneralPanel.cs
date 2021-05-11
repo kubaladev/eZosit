@@ -19,6 +19,8 @@ public class GeneralPanel : MonoBehaviour
     {
         this.objT = objT;
         selectedRT = rect;
+        sirkaInp.text = "";
+        vyskaInp.text = "";
         sirkaInp.text = Mathf.RoundToInt(rect.rect.width).ToString();
         vyskaInp.text = Mathf.RoundToInt(rect.rect.height).ToString();
         percentInp.text=ScaleToPercent(selectedRT.localScale.x).ToString();
@@ -38,7 +40,7 @@ public class GeneralPanel : MonoBehaviour
     }
     public void HidePanel()
     {
-        this.gameObject.SetActive(false);
+        ObjectModificator.Instance.DeactivatePanels();
     }
     public void UpdateRectSizeFromText()
     {

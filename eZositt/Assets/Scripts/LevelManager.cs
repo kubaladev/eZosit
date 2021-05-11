@@ -15,8 +15,8 @@ public struct UIBounds
 }
 public class LevelManager : Singleton<LevelManager>
 {
-    public UIBounds xb = new UIBounds(-300f, 300f);
-    public UIBounds yb = new UIBounds(-160f, 160f);
+    public UIBounds xb = new UIBounds(-306f, 306f);
+    public UIBounds yb = new UIBounds(-169f, 169f);
     public Texture2D CursorTexture;
     public Texture2D HandCursor;
     public Material wave;

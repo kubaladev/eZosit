@@ -4,6 +4,8 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
+using System.Text;
 
 public class GeneratedObject : MonoBehaviour
 {
@@ -12,13 +14,13 @@ public class GeneratedObject : MonoBehaviour
     protected Vector3 startingPos;
     public RawImage img;
     [SerializeField]
-    protected Outline outline;
+    public Outline outline;
     [SerializeField] protected Canvas canvas;
     public string type;
-    public string objectName="";
+    public string objectName = "";
     public GameObject pair;
-    public int imageID=0;
-    
+    public int imageID = 0;
+
 
     // Start is called before the first frame update
     virtual protected void Awake()
@@ -45,9 +47,23 @@ public class GeneratedObject : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FadeOut()
     {
-        
+        canvasGroup.DOFade(0, 0.4f);
+        rectTransform.DOScale(Vector3.zero, 0.4f);
+        Destroy(this.gameObject, 0.41f);
+    }
+    public void LoadTexture(byte[] data)
+    {
+        Texture2D tex = new Texture2D(2, 2);
+        tex.LoadImage(data);
+        img.texture = tex;
+        img.SetNativeSize();
+        while (rectTransform.rect.width > 256|| rectTransform.rect.height > 256)
+        {
+            rectTransform.sizeDelta=new Vector2(rectTransform.rect.width / 2, rectTransform.rect.height / 2);
+        }
+        ObjectModificator.Instance.UnselectObject();
+        ObjectModificator.Instance.SelectObject(this, this.GetComponent<ObjectT>());
     }
 }

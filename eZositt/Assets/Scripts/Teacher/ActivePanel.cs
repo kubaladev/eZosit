@@ -25,7 +25,7 @@ public class ActivePanel : MonoBehaviour
         {
             Color c;
             ColorUtility.TryParseHtmlString("#9CF175", out c);
-            friendTxt.text = "vytvorený";
+            friendTxt.text = "vytvorené";
             friendTxt.color = c;
         }
     }

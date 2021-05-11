@@ -28,7 +28,7 @@ public class ImageSerializer : Singleton<ImageSerializer>
         DataFile df = new DataFile();
         df.objects = objects.ToArray();
         df.zadanie = zadanie;
-        FileLoader.Instance.SaveAnimation(df.SaveData());
+        FileLoader.Instance.SaveJsonObject(df.SaveData());
     }
 }
 [System.Serializable]
@@ -122,6 +122,7 @@ public class SerializableTexture
     [SerializeField]
     public byte[] texbytes;
 }
+
 
 [System.Serializable]
 public class DataFile

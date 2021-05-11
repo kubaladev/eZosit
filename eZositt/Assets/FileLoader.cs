@@ -19,16 +19,23 @@ public class FileLoader : Singleton<FileLoader>
     }
     public void OpenBrowser()
     {
-        StartCoroutine(ShowLoadDialogCoroutine(@"Assets\Resources\","Nacitaj ulohu","Uloha"));
+        StartCoroutine(ShowLoadDialogCoroutine(@"Assets\Resources\","Načítaj úlohu","Úloha"));
     }
-    public void SaveAnimation(string data)
+    public void OpenImageBrowser()
     {
-        StartCoroutine(SaveAnimationCoroutine(data));
+        StartCoroutine(ShowLoadImageCoroutine(@"Assets\Resources\", "Načítaj obrázok", "obrázok"));
+    }
+    public void SaveJsonObject(string data)
+    {
+        StartCoroutine(SaveJsonCoroutine(data));
     }
     IEnumerator ShowLoadDialogCoroutine(string path, string tooltip,string type)
     {
         // Show a load file dialog and wait for a response from user
         // Load file/folder: file, Initial path: default (Documents), Title: "Load File", submit button text: "Load"
+        FileBrowser.Filter[] filters = new FileBrowser.Filter[1];
+        filters[0] = new FileBrowser.Filter("JSON files", ".json");
+        FileBrowser.SetFilters(true, filters);
         FileBrowser.SetDefaultFilter(".json");
         yield return FileBrowser.WaitForLoadDialog(false, path,tooltip,"Otvor");
 
@@ -47,7 +54,29 @@ public class FileLoader : Singleton<FileLoader>
         
         }
     }
-    IEnumerator SaveAnimationCoroutine(string data)
+    IEnumerator ShowLoadImageCoroutine(string path, string tooltip, string type)
+    {
+        // Show a load file dialog and wait for a response from user
+        // Load file/folder: file, Initial path: default (Documents), Title: "Load File", submit button text: "Load"
+        FileBrowser.Filter[] filters = new FileBrowser.Filter[2];
+        filters[0] = new FileBrowser.Filter("PNG", ".png");
+        filters[1] = new FileBrowser.Filter("JPG", ".jpg");
+        FileBrowser.SetFilters(true, filters);
+        FileBrowser.SetDefaultFilter(".png");
+        yield return FileBrowser.WaitForLoadDialog(false, path, tooltip, "Nahraj");
+
+        // Dialog is closed
+        // Print whether a file is chosen (FileBrowser.Success)
+        // and the path to the selected file (FileBrowser.Result) (null, if FileBrowser.Success is false)
+        Debug.Log(FileBrowser.Success + " " + FileBrowser.Result);
+
+        if (FileBrowser.Success)
+        {
+            ObjectModificator.Instance.LoadTexture(File.ReadAllBytes(FileBrowser.Result));
+
+        }
+    }
+    IEnumerator SaveJsonCoroutine(string data)
     {
         FileBrowser.SetDefaultFilter(".json");
         yield return FileBrowser.WaitForSaveDialog(false, @"Assets\Resources\", "Uloz ulohu", "Uloz");
@@ -55,14 +84,9 @@ public class FileLoader : Singleton<FileLoader>
         {
             string path = FileBrowser.Result;
             string fileName = FileBrowserHelpers.GetFilename(FileBrowser.Result);
-            File.WriteAllText(path, data);
-            
+            File.WriteAllText(path, data);           
         }
+    }
 
-    }
-    public void OpenDiagram()
-    {
-        StartCoroutine(ShowLoadDialogCoroutine(@"Assets\Resources\", "Load Diagram", "Diagram"));
-    }
 
 }

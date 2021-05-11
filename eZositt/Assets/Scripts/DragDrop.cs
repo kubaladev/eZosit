@@ -114,12 +114,7 @@ public class DragDrop : GeneratedObject, IPointerDownHandler, IPointerUpHandler,
     {
         rectTransform.eulerAngles = new Vector3(0,0,rectTransform.eulerAngles.z + value);
     }
-    public void FadeOut()
-    {
-        canvasGroup.DOFade(0, 0.4f);
-        rectTransform.DOScale(Vector3.zero, 0.4f);
-        Destroy(this.gameObject, 0.41f);
-    }
+
     public void OnSelectObject()
     {
         outline.enabled = true;

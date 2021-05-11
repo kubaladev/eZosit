@@ -7,7 +7,8 @@ public class ClickableObject : GeneratedObject, IPointerDownHandler
 {
     public List<Texture2D> imgFace;
     public int correctId = 0;
-    private int currentId;
+    public int currentId = 0;
+    public bool editor=false;
     public override void Initialize(SerializedObject data)
     {
         base.Initialize(data);
@@ -19,6 +20,7 @@ public class ClickableObject : GeneratedObject, IPointerDownHandler
             //Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), Vector2.one);
             imgFace.Add(tex);
         }
+        img.texture = imgFace[currentId];
 
     }
     public void SwitchImage()
@@ -39,7 +41,28 @@ public class ClickableObject : GeneratedObject, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        
-        SwitchImage();
+        if (!editor)
+        {
+            SwitchImage();
+        }
+        else
+        {
+            if (eventData.button.ToString().Equals("Right"))
+            {
+                SwitchImage();
+                ObjectModificator.Instance.klikaciPanel.UpdatePanel();
+            }
+        }
+
+    }
+    public void AddImage(Texture2D image)
+    {
+        imgFace.Add(image);
+        img.texture = image;
+    }
+    public void RemoveImage(int id)
+    {
+        imgFace.RemoveAt(id);
+        img.texture = imgFace[imgFace.Count - 1];
     }
 }
