@@ -78,6 +78,9 @@ public class FileLoader : Singleton<FileLoader>
     }
     IEnumerator SaveJsonCoroutine(string data)
     {
+        FileBrowser.Filter[] filters = new FileBrowser.Filter[1];
+        filters[0] = new FileBrowser.Filter("JSON files", ".json");
+        FileBrowser.SetFilters(true, filters);
         FileBrowser.SetDefaultFilter(".json");
         yield return FileBrowser.WaitForSaveDialog(false, @"Assets\Resources\", "Uloz ulohu", "Uloz");
         if (FileBrowser.Success)

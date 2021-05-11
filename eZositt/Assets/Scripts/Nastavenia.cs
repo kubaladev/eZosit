@@ -8,10 +8,16 @@ public class Nastavenia : MonoBehaviour
 {
     public Toggle[] toggles;
     public CanvasGroup cg;
+    public float time = 0.35f;
     public void Awake()
     {
         cg.alpha = 0;
-        cg.DOFade(1, 0.35f);
+        cg.DOFade(1, time);
+    }
+    public void Hello()
+    {
+        cg.alpha = 0;
+        cg.DOFade(1, time);
     }
     public void SetBoolValue(int index)
     {
@@ -27,8 +33,8 @@ public class Nastavenia : MonoBehaviour
     }
     public void Offline()
     {
-        cg.DOFade(0, 0.35f);
-        Invoke("OFF",0.35f);
+        cg.DOFade(0, time);
+        Invoke("OFF",time);
     }
     public void OFF()
     {
