@@ -84,6 +84,7 @@ MonoBehaviour:
   contextID: 0
   editor: 0
   text: 
+  empty: 1
 --- !u!114 &4111247548087619790
 MonoBehaviour:
   m_ObjectHideFlags: 0

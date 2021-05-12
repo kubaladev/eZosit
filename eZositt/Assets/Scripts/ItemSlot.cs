@@ -10,6 +10,9 @@ public class ItemSlot : GeneratedObject, IDropHandler {
     public int contextID = 0;
     public bool editor = false;
     public string text = "";
+    public bool empty = true;
+    public bool negative = false;
+    public bool notCounted = false;
     RectTransform place;
     protected override void Awake()
     {
@@ -25,40 +28,54 @@ public class ItemSlot : GeneratedObject, IDropHandler {
         contextID = data.contextID;
         img.color = data.color;
         text = data.textItemSlot;
+        if (type != null)
+        {
+            if (type.Equals("Afk"))
+            {
+                empty = false;
+            }
+        }
+
     }
     public void OnDrop(PointerEventData eventData) {
         if (!editor)
         {
-            if (eventData.pointerDrag != null)
+            if (empty)
             {
-                RectTransform other = eventData.pointerDrag.GetComponent<RectTransform>();
-                if (other.localScale.x <= place.localScale.x + scaleOffsetX &&
-                    other.localScale.y <= place.localScale.y + scaleOffsetY &&
-                    other.localScale.x >= place.localScale.x - scaleOffsetX &&
-                    other.localScale.y >= place.localScale.y - scaleOffsetY &&
-                    other.GetComponent<DragDrop>().imageID.Equals(imageID))
+                if (eventData.pointerDrag != null)
                 {
-                    eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-                    other.localScale = place.localScale;
-                    other.rotation = place.rotation;
-                    LevelManager.Instance.UnselectObject();
-                    DragDrop dg = other.GetComponent<DragDrop>();
-                    dg.DisableMovement();
-                    if (dg.contextID == contextID)
+                    RectTransform other = eventData.pointerDrag.GetComponent<RectTransform>();
+                    if (other != null)
                     {
-                        LevelManager.Instance.contextPoints++;
+                        if (other.localScale.x <= place.localScale.x + scaleOffsetX &&
+                      other.localScale.y <= place.localScale.y + scaleOffsetY &&
+                      other.localScale.x >= place.localScale.x - scaleOffsetX &&
+                      other.localScale.y >= place.localScale.y - scaleOffsetY &&
+                      other.GetComponent<DragDrop>().imageID.Equals(imageID))
+                        {
+                            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+                            other.localScale = place.localScale;
+                            other.rotation = place.rotation;
+                            LevelManager.Instance.UnselectObject();
+                            DragDrop dg = other.GetComponent<DragDrop>();
+                            dg.DisableMovement();
+                            if (dg.contextID == contextID)
+                            {
+                                negative = true;
+                            }
+                            SoundManager.Instance.PlaySound(2);
+                            empty = false;
+                        }
+                        else
+                        {
+                            //other.GetComponent<DragDrop>().ResetLastPosition();
+                            //LevelManager.Instance.UnselectObject();
+                            SoundManager.Instance.PlaySound(4);
+
+                        }
                     }
-                    SoundManager.Instance.PlaySound(2);
+                  
                 }
-                else
-                {
-                    //other.GetComponent<DragDrop>().ResetLastPosition();
-                    //LevelManager.Instance.UnselectObject();
-                    SoundManager.Instance.PlaySound(4);
-
-                }
-
-
             }
         }
         

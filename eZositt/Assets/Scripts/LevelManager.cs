@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using UnityEngine.SceneManagement;
 public struct UIBounds
 {
@@ -22,23 +23,55 @@ public class LevelManager : Singleton<LevelManager>
     public Material wave;
     public Material empty;
     public DragDrop selectedObject = null;
-    public RectTransform[] shuffleArray;
-    public int contextPoints = 0;
-    public int contextMaxPoints = 0;
+    public GameObject midPanel;
+    public bool control=false;
+    public EndPanel hurrayPanel;
+    public EndPanel sadPanel;
+    public EndPanel nekontrolPanel;
+    public CanvasGroup hide;
+
+    public void HideLevel()
+    {
+        hide.gameObject.SetActive(true);
+        hide.DOFade(1, 0.75f);
+    }
+    public void ShowLevel()
+    {
+        hide.DOFade(0, 0.75f);
+        Invoke("HideHide", 0.75f);
+    }
+    public void HideHide()
+    {
+        hide.gameObject.SetActive(false);
+    }
     private void Awake()
     {
         Cursor.SetCursor(CursorTexture,new Vector2(50f,20f), CursorMode.Auto);
     }
-    private void Start()
+    public void Randomize()
     {
-        foreach(RectTransform rc in shuffleArray)
-        {
-            int random = Random.Range(0, shuffleArray.Length);
-            Vector3 helpPos = rc.position;
-            rc.position = shuffleArray[random].position;
-            shuffleArray[random].position = helpPos;
+        ClickableObject[] coObjects = midPanel.GetComponentsInChildren<ClickableObject>();
+        if (coObjects != null)
+            foreach (ClickableObject co in coObjects)
+            {
+                co.currentId = Random.Range(0, co.imgFace.Count);
+                co.img.texture = co.imgFace[co.currentId];
+            }
+    }
+    public void Shuffle()
+    {
+        DragDrop[] dgObjects = midPanel.GetComponentsInChildren<DragDrop>();
+        if (dgObjects != null)
+            foreach (DragDrop rc in dgObjects)
+            {
+                int random = Random.Range(0, dgObjects.Length);
+                Vector3 helpPos = new Vector3(rc.rectTransform.position.x, rc.rectTransform.position.y, rc.rectTransform.position.z);
+                Vector3 nPos = new Vector3(dgObjects[random].rectTransform.position.x, dgObjects[random].rectTransform.position.y, dgObjects[random].rectTransform.position.z);
+                rc.rectTransform.position = nPos;
+                dgObjects[random].rectTransform.position = helpPos;
 
-        }
+
+            }
     }
     public void ChangeCursor(bool hand)
     {
@@ -79,20 +112,74 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void Restart()
     {
+        HideLevel();
+        Invoke("ReloadScene", 1f);
+    }
+    public void ReloadScene()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void ReloadLevel()
+    {
+        foreach (Transform child in midPanel.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        HideLevel();
+        Invoke("LoadLevel", 1f);
+
     }
     public void CheckComplete()
     {
-        SoundManager.Instance.PlaySound(5);
+        if (!control)
+        {
+            nekontrolPanel.SetupPanel(0, 0);
+            return;
+        }
+        int contextPoints = 0;
+        int contextMaxPoints = 0;
+        ItemSlot[] itemSlots = midPanel.GetComponentsInChildren<ItemSlot>();
+        if (itemSlots != null)
+        {
+            foreach(ItemSlot itemSlot in itemSlots)
+            {
+                if (!itemSlot.notCounted)
+                {
+                    contextMaxPoints++;
+                    if (itemSlot.empty || itemSlot.negative)
+                    {
+
+                    }
+                    else
+                    {
+                        contextPoints++;
+                    }
+                }
+
+            }
+        }
+        ClickableObject[] clickableObjects = midPanel.GetComponentsInChildren<ClickableObject>();
+        if (clickableObjects != null)
+        {
+            foreach (ClickableObject clickableObject in clickableObjects)
+            {
+                contextMaxPoints++;
+                if (clickableObject.correctId == clickableObject.currentId)
+                {
+                    contextPoints++;
+                }
+            }
+        }
         if (contextPoints >= contextMaxPoints)
         {
-            
-            Invoke("NextTask", 1f);
+            hurrayPanel.SetupPanel(contextPoints, contextMaxPoints);
+            SoundManager.Instance.PlaySound(5);
         }
         else
         {
-            Invoke("Restart", 1f);
+            sadPanel.SetupPanel(contextPoints, contextMaxPoints);
         }
+
     }
     public void NextTask()
     {
@@ -105,6 +192,10 @@ public class LevelManager : Singleton<LevelManager>
         {
             SceneManager.LoadScene(0);
         }
+    }
+    public void LoadLevel()
+    {
+        ObjectFactory.Instance.TestLoad();
     }
 }
 
