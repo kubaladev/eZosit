@@ -56,6 +56,8 @@ public class KlikaciPanel : MonoBehaviour
             dropdown.ClearOptions();
             dropdown.AddOptions(GetListOfLengthX(clickableObject.imgFace.Count));
             dropdown.value = dropdown.options.Count - 1;
+            clickableObject.currentId = dropdown.value;
+            UpdateText();
         }
 
     }
@@ -63,10 +65,20 @@ public class KlikaciPanel : MonoBehaviour
     {
         if (dropdown.options.Count > 1)
         {
+            if (clickableObject.correctId > dropdown.value)
+            {
+                clickableObject.correctId--;
+            }
+            else if (clickableObject.correctId == dropdown.value)
+            {
+                clickableObject.correctId=999;
+            }
             clickableObject.RemoveImage(dropdown.value);
             dropdown.ClearOptions();
             dropdown.AddOptions(GetListOfLengthX(clickableObject.imgFace.Count));
             dropdown.value = dropdown.options.Count - 1;
+            clickableObject.currentId = dropdown.value;
+            UpdateText();
         }
 
     }

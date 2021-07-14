@@ -19,7 +19,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
     {
         GenerateScene(ImageSerializer.Instance.data.objects);
         zadanie.text = ImageSerializer.Instance.data.zadanie;
-        LevelManager.Instance.control = ImageSerializer.Instance.control;
+        LevelManager.Instance.control = ImageSerializer.Instance.data.control;
         SetupHomework.Instance.Setup(ImageSerializer.Instance.data);
         LevelManager.Instance.ShowLevel();
         if (ImageSerializer.Instance.data.shuffle)

@@ -59,7 +59,7 @@ public class ItemSlot : GeneratedObject, IDropHandler {
                             LevelManager.Instance.UnselectObject();
                             DragDrop dg = other.GetComponent<DragDrop>();
                             dg.DisableMovement();
-                            if (dg.contextID == contextID)
+                            if (dg.contextID != contextID)
                             {
                                 negative = true;
                             }

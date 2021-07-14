@@ -82,10 +82,10 @@ public class DragDrop : GeneratedObject, IPointerDownHandler, IPointerUpHandler,
     }
     public bool CheckBounds(PointerEventData eventData)
     {
-        if ((eventData.delta.x / canvas.scaleFactor + rectTransform.anchoredPosition.x > LevelManager.Instance.xb.p) ||
-                (eventData.delta.x / canvas.scaleFactor + rectTransform.anchoredPosition.x < LevelManager.Instance.xb.n) ||
-                (eventData.delta.y / canvas.scaleFactor + rectTransform.anchoredPosition.y > LevelManager.Instance.yb.p) ||
-                (eventData.delta.y / canvas.scaleFactor + rectTransform.anchoredPosition.y < LevelManager.Instance.yb.n))
+        if ((eventData.delta.x / canvas.scaleFactor + rectTransform.rect.xMax * rectTransform.localScale.x + rectTransform.anchoredPosition.x > LevelManager.Instance.xb.p) ||
+                (eventData.delta.x / canvas.scaleFactor + rectTransform.rect.xMin * rectTransform.localScale.x + rectTransform.anchoredPosition.x < LevelManager.Instance.xb.n) ||
+                (eventData.delta.y / canvas.scaleFactor + rectTransform.rect.yMax * rectTransform.localScale.x + rectTransform.anchoredPosition.y > LevelManager.Instance.yb.p) ||
+                (eventData.delta.y / canvas.scaleFactor + rectTransform.rect.yMin * rectTransform.localScale.x + rectTransform.anchoredPosition.y < LevelManager.Instance.yb.n))
             return false;
         else
             return true;

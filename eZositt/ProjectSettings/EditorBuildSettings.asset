@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Ulohy.unity
-    guid: 553de2c58d10fb74ab9759e2a50c57f0
+    path: Assets/Scenes/Zosit.unity
+    guid: 754321275f562a444b8c2c0480143afc
   m_configObjects: {}

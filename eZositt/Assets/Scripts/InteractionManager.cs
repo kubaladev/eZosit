@@ -70,17 +70,16 @@ public class InteractionManager : Singleton<InteractionManager>
     {
         if(LevelManager.Instance.selectedObject != null)
         {
-            if (LevelManager.Instance.selectedObject.rectTransform.localPosition.x < 250f)
+            if (LevelManager.Instance.selectedObject.rectTransform.localPosition.x + LevelManager.Instance.selectedObject.rectTransform.sizeDelta.x * LevelManager.Instance.selectedObject.rectTransform.localScale.x < 280)
             {
                 GameObject go = Instantiate(LevelManager.Instance.selectedObject.gameObject, LevelManager.Instance.selectedObject.transform.parent);
-                
-                RectTransform gorc = go.GetComponent<RectTransform>();       
-                Vector3 scaledGO = gorc.localScale;
-                gorc.localScale = Vector3.zero;
-                gorc.DOMoveX(gorc.position.x + 1f, 0.5f);
-                gorc.DOScale(scaledGO,0.5f);
-
-                LevelManager.Instance.SelectObject(go.GetComponent<DragDrop>());
+                DragDrop dg = go.GetComponent<DragDrop>();       
+                Vector3 scaledGO = dg.rectTransform.localScale;
+                dg.rectTransform.localScale = Vector3.zero;
+                dg.rectTransform.DOMoveX(dg.rectTransform.position.x + (dg.rectTransform.sizeDelta.x / 43 * this.gameObject.transform.localScale.x), 0.5f);
+                dg.rectTransform.DOScale(scaledGO,0.5f);
+                dg.original = false;
+                LevelManager.Instance.SelectObject(dg);
                 SoundManager.Instance.PlaySound(0);
             }
             

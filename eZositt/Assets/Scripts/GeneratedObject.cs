@@ -20,6 +20,7 @@ public class GeneratedObject : MonoBehaviour
     public string objectName = "";
     public GameObject pair;
     public int imageID = 0;
+    public bool original = true;
 
 
     // Start is called before the first frame update
@@ -50,9 +51,13 @@ public class GeneratedObject : MonoBehaviour
 
     public void FadeOut()
     {
-        canvasGroup.DOFade(0, 0.4f);
-        rectTransform.DOScale(Vector3.zero, 0.4f);
-        Destroy(this.gameObject, 0.41f);
+        if (!original)
+        {
+            canvasGroup.DOFade(0, 0.4f);
+            rectTransform.DOScale(Vector3.zero, 0.4f);
+            Destroy(this.gameObject, 0.41f);
+        }
+
     }
     public void LoadTexture(byte[] data)
     {

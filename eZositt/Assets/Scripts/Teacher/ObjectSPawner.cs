@@ -150,9 +150,11 @@ public class ObjectSPawner : Singleton<ObjectSPawner>
         {
             foreach(ItemSlot itemSlot in friends)
             {
+                Debug.Log(contextId);
+                Debug.Log(itemSlot.contextID);
                 if (itemSlot.contextID == contextId)
                 {
-                    itemSlot.FadeOut();
+                    itemSlot.GetComponent<ObjectT>().FadeOut();
                 }
             }
         }

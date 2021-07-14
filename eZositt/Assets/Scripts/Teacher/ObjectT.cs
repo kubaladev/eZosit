@@ -93,15 +93,20 @@ public class ObjectT:MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     {
         canvasGroup.DOFade(0, 0.4f);
         rectTransform.DOScale(Vector3.zero, 0.4f);
-        Destroy(this.gameObject, 0.41f);
         if (typ.Equals(GenObjectType.Drag))
         {
-            ObjectSPawner.Instance.FindAndKillAllFriends(GetComponent<DragDrop>().contextID);
+            DragDrop dg = GetComponent<DragDrop>();
+            if (dg != null)
+            {
+                ObjectSPawner.Instance.FindAndKillAllFriends(dg.contextID);
+                Debug.Log("Removing");
+            }
         }
+        Destroy(this.gameObject, 0.45f);
     }
     public void Duplicate()
     {
-        if (rectTransform.localPosition.x +rectTransform.sizeDelta.x<280)
+        if (rectTransform.localPosition.x +rectTransform.sizeDelta.x*rectTransform.localScale.x<280)
         {
             GameObject go = Instantiate(this.gameObject, this.transform.parent);
 

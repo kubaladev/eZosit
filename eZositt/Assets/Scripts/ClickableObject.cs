@@ -22,6 +22,15 @@ public class ClickableObject : GeneratedObject, IPointerDownHandler
             //Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), Vector2.one);
             imgFace.Add(tex);
         }
+        if (currentId >= imgFace.Count)
+        {
+            currentId = 0;
+            
+        }
+        if(correctId >= imgFace.Count)
+        {
+            correctId = 0;
+        }
         img.texture = imgFace[currentId];
 
 

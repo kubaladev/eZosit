@@ -29,6 +29,7 @@ public class LevelManager : Singleton<LevelManager>
     public EndPanel sadPanel;
     public EndPanel nekontrolPanel;
     public CanvasGroup hide;
+    public Button deleteBtn;
 
     public void HideLevel()
     {
@@ -87,10 +88,20 @@ public class LevelManager : Singleton<LevelManager>
     public void SelectObject(DragDrop dragObj)
     {
         if (dragObj != selectedObject)
+
         {
             UnselectObject();
             selectedObject = dragObj;
-            selectedObject?.GetComponent<DragDrop>().OnUnselectObject();
+            if (dragObj.original)
+            {
+                if(deleteBtn.enabled)
+                    deleteBtn.interactable = false;
+            }
+            else
+            {
+                if (deleteBtn.enabled)
+                    deleteBtn.interactable = true;
+            }
         }
 
         
@@ -99,7 +110,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (selectedObject != null)
         {
-            selectedObject.OnUnselectObject();
+            selectedObject?.GetComponent<DragDrop>().OnUnselectObject();
             selectedObject = null;
         }
     }

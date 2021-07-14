@@ -1023,7 +1023,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &253535555
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1554,9 +1554,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 244.00002, y: -7.468361}
+  m_AnchoredPosition: {x: 244, y: -31.971527}
   m_SizeDelta: {x: 49.00634, y: 49.00634}
-  m_Pivot: {x: 0.49999973, y: 1}
+  m_Pivot: {x: 0.49999973, y: 0.5}
 --- !u!114 &336759247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4397,6 +4397,7 @@ MonoBehaviour:
   sadPanel: {fileID: 253535556}
   nekontrolPanel: {fileID: 1820502195}
   hide: {fileID: 1568812643}
+  deleteBtn: {fileID: 1651743439}
 --- !u!114 &1195884050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5045,7 +5046,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tvoj zo\u0161it"
+  m_text: "Tvoj Zo\u0161it"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1b8b6324edcab084d958fc838045ff01, type: 2}
   m_sharedMaterial: {fileID: -3518781819228114082, guid: 1b8b6324edcab084d958fc838045ff01,
@@ -6699,7 +6700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1820502194
 RectTransform:
   m_ObjectHideFlags: 0
